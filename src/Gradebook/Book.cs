@@ -6,28 +6,28 @@ namespace Gradebook
     public class Book
     {
         private List<double> grades;
-        private string name;
+        public string Name;
 
         public Book(string name)
         {
             grades = new List<double>();
-            this.name = name;
+            Name = name;
         }
 
         public Book(string name, List<double> grades)
         {
-            this.name = name;
+            Name = name;
             this.grades = grades;
         }
 
-        public string getname()
+        public string Getname()
         {
-            return name;
+            return Name;
         }
 
-        public void setName(string name)
+        public void SetName(string name)
         {
-            this.name = name;
+            Name = name;
         }
 
         public List<double> GetGrades()
@@ -178,14 +178,14 @@ namespace Gradebook
         {
             if (grades.Count <= 0)
             {
-                Console.WriteLine($"No grades found in {name}'s Gradebook.");
+                Console.WriteLine($"No grades found in {Name}'s Gradebook.");
             }
             else
             {
                 char charToRepeat = '=';
                 string repeatedString = new string(charToRepeat, 30);
                 Console.WriteLine($"\n{repeatedString}");
-                Console.WriteLine($"Gradebook for {name}");
+                Console.WriteLine($"Gradebook for {Name}");
                 Console.WriteLine(ToString());
                 Console.WriteLine($"Lowest Grade: {GetStatistics().LowGrade:N1}");
                 Console.WriteLine($"Highest Grade: {GetStatistics().HighGrade:N1}");

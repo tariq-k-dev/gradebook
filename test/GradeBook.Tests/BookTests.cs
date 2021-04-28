@@ -17,7 +17,7 @@ namespace GradeBook.Tests
         }
 
         [Fact]
-        public void AddGradeTest()
+        public void GradeBookAddsGrade()
         {
             // arrange
             Book book = new Book("Linus van Pelt");
@@ -31,7 +31,7 @@ namespace GradeBook.Tests
         }
 
         [Fact]
-        public void LowestGradeTest()
+        public void GradeBookReturnsLowestGrade()
         {
             // arrange
             Book book = new Book("Linus van Pelt");
@@ -48,7 +48,7 @@ namespace GradeBook.Tests
         }
 
         [Fact]
-        public void HighestGradeTest()
+        public void GradeBookReturnsHighestGrade()
         {
             // arrange
             Book book = new Book("Linus van Pelt");
@@ -64,7 +64,7 @@ namespace GradeBook.Tests
         }
 
         [Fact]
-        public void AverageTest()
+        public void GradeBookCalculatesAverageGrade()
         {
             // arrange
             Book book = new Book("Linus van Pelt");
@@ -83,7 +83,7 @@ namespace GradeBook.Tests
         }
 
         [Fact]
-        public void StatisticsTest()
+        public void GradeBookReturnsStatistics()
         {
             // arrange
             List<double> grades = new List<double> { 95.8, 98.9, 100 };
