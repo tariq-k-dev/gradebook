@@ -45,7 +45,7 @@ namespace Gradebook
             else
             {
                 grades.Add(Math.Round(grade, 1));
-                Console.WriteLine($"\nAddied Grade {grade} for Student {Name}: [ {string.Join(", ", GetGrades())} ]");
+                Console.WriteLine($"\nAdded Grade {grade} for Student {Name}: [ {string.Join(", ", GetGrades())} ]");
             }
         }
 
@@ -53,6 +53,7 @@ namespace Gradebook
         {
             if (grades.Contains(grade))
             {
+                Console.WriteLine($"\nInitial Grade Set: [ {string.Join(", ", grades)} ] \nRemoving Grade: {grade}");
                 grades.Remove(grade);
                 Console.WriteLine($"\nRemoved Grade {grade} for Student {Name}: [ {string.Join(", ", GetGrades())} ]");
             }
