@@ -31,6 +31,22 @@ namespace GradeBook.Tests
         }
 
         [Fact]
+        public void GradeBookRemovesGrade()
+        {
+            // arrange
+            List<double> grades = new List<double>() { 98, 94.5, 99.5, 92.8, 100 };
+            Book book = new Book("Snoopy", grades);
+            output.WriteLine($"Initial Grade Set: [ {string.Join(", ", grades)} ]");
+
+            // act
+            book.RemoveGrade(92.8);
+            output.WriteLine($"\tFinal Grade Set:   [ {string.Join(", ", book.GetGrades())} ]");
+
+            // assert
+            Assert.DoesNotContain(92.8, book.GetGrades());
+        }
+
+        [Fact]
         public void GradeBookReturnsLowestGrade()
         {
             // arrange
@@ -79,7 +95,7 @@ namespace GradeBook.Tests
             output.WriteLine($"Returned Average Grade: {avgGrade}");
 
             // assert
-            Assert.Equal(avgCalculated, avgGrade);
+            Assert.Equal(avgCalculated, avgGrade, 1);
         }
 
         [Fact]
