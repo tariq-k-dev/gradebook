@@ -31,6 +31,22 @@ namespace GradeBook.Tests
         }
 
         [Fact]
+        public void GradeBookRemovesGrade()
+        {
+            // arrange
+            List<double> grades = new List<double>() { 98, 94.5, 99.5, 92.8, 100 };
+            Book book = new Book("Snoopy", grades);
+            output.WriteLine($"Initial Grade Set: [ {string.Join(", ", grades)} ] \n\tRemoving Grade: 92.8");
+
+            // act
+            book.RemoveGrade(92.8);
+            output.WriteLine($"\tFinal Grade Set:   [ {string.Join(", ", book.GetGrades())} ]");
+
+            // assert
+            Assert.DoesNotContain(92.8, book.GetGrades());
+        }
+
+        [Fact]
         public void GradeBookReturnsLowestGrade()
         {
             // arrange
@@ -71,15 +87,16 @@ namespace GradeBook.Tests
             book.AddGrade(89.1);
             book.AddGrade(90.5);
             book.AddGrade(77.3);
-            double avgCalculated = (89.1 + 90.5 + 77.3) / 3;
+            double avgCalculated = Math.Round(((89.1 + 90.5 + 77.3) / 3), 1);
 
             // act
             double avgGrade = book.Average();
-            // output.WriteLine("Average Grade Value Test");
-            output.WriteLine($"Returned Average Grade: {avgGrade}");
+            output.WriteLine("Average Grade Test Results:");
+            output.WriteLine($"\tReturned Average Grade: {avgGrade}");
+            output.WriteLine($"\tAsserted Test Grade: {avgGrade}");
 
             // assert
-            Assert.Equal(avgCalculated, avgGrade);
+            Assert.Equal(avgCalculated, avgGrade, 1);
         }
 
         [Fact]
@@ -93,11 +110,13 @@ namespace GradeBook.Tests
             double lowGrade = book.GetStatistics().LowGrade;
             double highGrade = book.GetStatistics().HighGrade;
             double averageGrade = book.GetStatistics().AverageGrade;
+            char letterGrade = book.GetStatistics().LetterGrade;
 
             // assert
             Assert.Equal(95.8, lowGrade, 1);
             Assert.Equal(100, highGrade, 1);
             Assert.Equal(98.2, averageGrade, 1);
+            Assert.Equal('A', letterGrade);
         }
     }
 }

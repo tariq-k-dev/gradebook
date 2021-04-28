@@ -5,6 +5,8 @@ namespace Gradebook
         public double AverageGrade = 0;
         public double HighGrade = double.MinValue;
         public double LowGrade = double.MaxValue;
+
+        public char LetterGrade;
     }
 
 }
