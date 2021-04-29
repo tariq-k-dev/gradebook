@@ -45,7 +45,7 @@ namespace Gradebook
             else
             {
                 grades.Add(grade);
-                Console.WriteLine($"\nAdded Grade {grade:N1} for Student {Name}: {GradesToString()}");
+                Console.WriteLine($"\nAdded Grade {grade:N1} for Student {Name}: {GradesToString()}\n");
             }
         }
 
@@ -53,13 +53,12 @@ namespace Gradebook
         {
             if (grades.Contains(grade))
             {
-                Console.WriteLine($"\nInitial Grade Set: {GradesToString()} \nRemoving Grade: {grade}");
                 grades.Remove(grade);
-                Console.WriteLine($"\nRemoved Grade {grade:N1} for Student {Name}: {GradesToString()}");
+                Console.WriteLine($"\nRemoved Grade {grade:N1} for Student {Name}: {GradesToString()}\n");
             }
             else
             {
-                Console.WriteLine($"{grade} not found in gradebook.");
+                Console.WriteLine($"\nGrade value {grade} not found in gradebook: {GradesToString()}\n");
             }
         }
 
@@ -149,7 +148,7 @@ namespace Gradebook
 
             if (grades.Count == 0)
             {
-                Console.WriteLine("No grades found in the Grade Book.");
+                Console.WriteLine("\n*** No grades found in the Grade Book. ***\n");
             }
             else
             {
@@ -273,7 +272,7 @@ namespace Gradebook
         {
             if (grades.Count <= 0)
             {
-                Console.WriteLine($"No grades found in {Name}'s Gradebook.");
+                Console.WriteLine($"\n*** No grades found in {Name}'s Gradebook. ***\n");
             }
             else
             {
