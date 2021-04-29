@@ -45,7 +45,7 @@ namespace Gradebook
             else
             {
                 grades.Add(grade);
-                Console.WriteLine($"\nAdded Grade {grade:N1} for Student {Name}: {GradeToString()}");
+                Console.WriteLine($"\nAdded Grade {grade:N1} for Student {Name}: {GradesToString()}");
             }
         }
 
@@ -53,8 +53,9 @@ namespace Gradebook
         {
             if (grades.Contains(grade))
             {
+                Console.WriteLine($"\nInitial Grade Set: {GradesToString()} \nRemoving Grade: {grade}");
                 grades.Remove(grade);
-                Console.WriteLine($"\nRemoved Grade {grade:N1} for Student {Name}: {GradeToString()}");
+                Console.WriteLine($"\nRemoved Grade {grade:N1} for Student {Name}: {GradesToString()}");
             }
             else
             {
@@ -120,7 +121,7 @@ namespace Gradebook
             }
         }
 
-        public string GradeToString()
+        public string GradesToString()
         {
             string gradesToString = $"[ ";
 
@@ -277,7 +278,7 @@ namespace Gradebook
             else
             {
                 char charToRepeat = '=';
-                string gradesOutput = $"     Grades: {GradeToString()}";
+                string gradesOutput = $"     Grades: {GradesToString()}";
                 string repeatedString = new string(charToRepeat, (grades.Count < 4 ? 32 : gradesOutput.Length + 5));
                 Console.WriteLine($"\n{repeatedString}");
                 Console.WriteLine($"     Gradebook for {Name}");
