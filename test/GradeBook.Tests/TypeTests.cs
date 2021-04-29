@@ -9,23 +9,19 @@ namespace GradeBook.Tests
     public class TypeTest
 
     {
-        private int GetInt()
-        {
-            return 3;
-        }
-
-        private void SetInt(ref int x)
-        {
-            x = 42;
-        }
-
         [Fact]
-        public void GetIntTest()
+        public void StringsBehaveLikeValueTypes()
         {
-            int x = GetInt();
-            SetInt(ref x);
+            string name = "Snoopy";
+            string nameUpper = MakeUpperCase(name);
 
-            Assert.Equal(42, x);
+            Assert.Equal("Snoopy", name);
+            Assert.Equal("SNOOPY", nameUpper);
+        }
+
+        private string MakeUpperCase(string parameter)
+        {
+            return parameter.ToUpper();
         }
 
         Book GetBook(string name)
@@ -97,6 +93,7 @@ namespace GradeBook.Tests
             // Verify by name
             Assert.Equal("Book 1", book1.Name);
             Assert.Equal("Book 1", book2.Name);
+
 
             // Verify using the same method in the Assert class
             Assert.Same(book1, book2);

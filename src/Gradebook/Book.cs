@@ -5,12 +5,13 @@ namespace Gradebook
 {
     public class Book
     {
-        private List<double> grades;
+        private List<double> grades = new List<double>();
         public string Name;
+
+        public Book() { }
 
         public Book(string name)
         {
-            grades = new List<double>();
             Name = name;
         }
 
@@ -39,12 +40,12 @@ namespace Gradebook
         {
             if (grade < 0 || grade > 100)
             {
-                Console.WriteLine("\nValid grade range is between 0 and 100!");
-                Console.WriteLine($"Invalid grade that was entered: {grade}");
+                Console.WriteLine("\nValid grades are from 0 to 100");
             }
             else
             {
-                grades.Add(Math.Round(grade, 1));
+                grades.Add(grade);
+                Console.WriteLine($"\nAdded Grade {grade:N1} for Student {Name}: {GradeToString()}");
             }
         }
 
@@ -53,10 +54,11 @@ namespace Gradebook
             if (grades.Contains(grade))
             {
                 grades.Remove(grade);
+                Console.WriteLine($"\nRemoved Grade {grade:N1} for Student {Name}: {GradeToString()}");
             }
             else
             {
-                Console.WriteLine($"{grade} not found in grade book.");
+                Console.WriteLine($"{grade} not found in gradebook.");
             }
         }
 
@@ -110,7 +112,7 @@ namespace Gradebook
 
                 double averagePoints = totalPoints / grades.Count;
 
-                return averagePoints;
+                return Math.Round(averagePoints, 1);
             }
             else
             {
@@ -118,20 +120,20 @@ namespace Gradebook
             }
         }
 
-        public override string ToString()
+        public string GradeToString()
         {
-            string gradesToString = $"\nGrades: [ ";
+            string gradesToString = $"[ ";
 
             int count = grades.Count;
             foreach (double grade in grades)
             {
                 if (count > 1)
                 {
-                    gradesToString += grade + ", ";
+                    gradesToString += $"{grade:N1}, ";
                 }
                 else
                 {
-                    gradesToString += grade;
+                    gradesToString += $"{grade:N1}";
                 }
                 count--;
             }
@@ -167,11 +169,103 @@ namespace Gradebook
                     averageGrade += grade;
                 }
 
+                /*
+                // using a for loop to calculate the average grade
+                for (int i = 0; i < grades.Count; i++)
+                {
+                    if (grades[i] < result.LowGrade)
+                    {
+                        result.LowGrade = Math.Min(grades[i], result.LowGrade);
+                    }
+
+                    if (grades[i] > result.HighGrade)
+                    {
+                        result.HighGrade = Math.Max(grades[i], result.HighGrade);
+                    }
+
+                    averageGrade += grades[i];
+                    i += 1;
+                }
+                */
+
+                /*
+                // using a while loop to calculate the average grade
+                int i = 0;
+                while (i < grades.Count)
+                {
+                    if (grades[i] < result.LowGrade)
+                    {
+                        result.LowGrade = Math.Min(grades[i], result.LowGrade);
+                    }
+
+                    if (grades[i] > result.HighGrade)
+                    {
+                        result.HighGrade = Math.Max(grades[i], result.HighGrade);
+                    }
+
+                    averageGrade += grades[i];
+                    i += 1;
+                }
+                */
+
+                /*
+                // using do/while to calculate the average grade
+                if (grades.Count > 0)
+                {
+                    int i = 0;
+                    do
+                    {
+                        if (grades[i] < result.LowGrade)
+                        {
+                            result.LowGrade = Math.Min(grades[i], result.LowGrade);
+                        }
+
+                        if (grades[i] > result.HighGrade)
+                        {
+                            result.HighGrade = Math.Max(grades[i], result.HighGrade);
+                        }
+
+                        averageGrade += grades[i];
+                        i += 1;
+                    } while (i < grades.Count);
+                }
+                */
+
                 averageGrade /= grades.Count;
                 result.AverageGrade = averageGrade;
+                result.LetterGrade = AddLetterGrade(averageGrade);
             }
 
             return result;
+        }
+
+        public char AddLetterGrade(double averageGrade)
+        {
+            char letterGrade = default;
+
+            switch (averageGrade)
+            {
+                case double grade when grade >= 90:
+                    letterGrade = 'A';
+                    break;
+                case double grade when grade >= 80:
+                    letterGrade = 'B';
+                    break;
+                case double grade when grade >= 70:
+                    letterGrade = 'C';
+                    break;
+                case double grade when grade >= 60:
+                    letterGrade = 'D';
+                    break;
+                case double grade when grade < 60:
+                    letterGrade = 'F';
+                    break;
+                default:
+                    letterGrade = 'F';
+                    break;
+            }
+
+            return letterGrade;
         }
 
         public void ShowStatistics()
@@ -183,13 +277,16 @@ namespace Gradebook
             else
             {
                 char charToRepeat = '=';
-                string repeatedString = new string(charToRepeat, 30);
+                string gradesOutput = $"     Grades: {GradeToString()}";
+                string repeatedString = new string(charToRepeat, (grades.Count < 4 ? 32 : gradesOutput.Length + 5));
                 Console.WriteLine($"\n{repeatedString}");
-                Console.WriteLine($"Gradebook for {Name}");
-                Console.WriteLine(ToString());
-                Console.WriteLine($"Lowest Grade: {GetStatistics().LowGrade:N1}");
-                Console.WriteLine($"Highest Grade: {GetStatistics().HighGrade:N1}");
-                Console.WriteLine($"Average Grade: {GetStatistics().AverageGrade:N1}");
+                Console.WriteLine($"     Gradebook for {Name}");
+                Console.WriteLine($"{repeatedString}");
+                Console.WriteLine(gradesOutput);
+                Console.WriteLine($"     Lowest Grade: {GetStatistics().LowGrade:N1}");
+                Console.WriteLine($"     Highest Grade: {GetStatistics().HighGrade:N1}");
+                Console.WriteLine($"     Average Grade: {GetStatistics().AverageGrade:N1}");
+                Console.WriteLine($"     Letter Grade: {GetStatistics().LetterGrade}");
                 Console.WriteLine($"{repeatedString}\n");
             }
         }

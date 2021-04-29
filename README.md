@@ -1,3 +1,5 @@
 # Gradebook Project
 
-A C# Grade Book project that runs in the console
+A C# Gradebook project that runs in the console.
+
+![Gradebook Console Demo](/images/gradebook-console-demo.png)
